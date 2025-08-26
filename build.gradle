@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.18'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.example'
+version = '1.0.0'
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+repositories { mavenCentral() }
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.h2database:h2'
+
+    // ⬇️ Reemplaza jjwt 0.9.1 por el set compatible con JDK 17
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly   'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly   'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test { useJUnitPlatform() }

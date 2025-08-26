@@ -1,0 +1,10 @@
+jwt:
+  secret: "test_secret_de_32_bytes_min_1234567890abcd"
+  expiration-minutes: 120
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+  sql:
+    init:
+      mode: always
