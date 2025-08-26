@@ -16,7 +16,7 @@ public class PhoneRequest {
     private String citycode;
 
     @JsonAlias({"countrycode"})
-    @JsonProperty("contrycode")
+    @JsonProperty("countrycode")
     @NotBlank(message = "El código de país es obligatorio")
     private String countrycode;
 

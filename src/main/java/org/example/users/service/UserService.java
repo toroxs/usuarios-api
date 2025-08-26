@@ -9,7 +9,6 @@ import org.example.users.security.JwtService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -40,7 +39,6 @@ public class UserService {
         String token = jwtService.generateToken(entity.getId(), entity.getEmail());
         entity.setToken(token);
 
-
         if (request.getPhones() != null) {
             for (PhoneRequest p : request.getPhones()) {
                 PhoneEntity pe = new PhoneEntity();
@@ -55,7 +53,6 @@ public class UserService {
 
         return toResponse(saved);
     }
-
 
     private UserResponse toResponse(UserEntity u) {
         List<PhoneResponse> phones = u.getPhones().stream()

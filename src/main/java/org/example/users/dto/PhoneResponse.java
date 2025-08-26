@@ -6,16 +6,13 @@ public class PhoneResponse {
     private String number;
     private String citycode;
 
-
-    @JsonProperty("contrycode")
+    @JsonProperty("countrycode")
     private String countrycode;
-
 
     public PhoneResponse() {}
     public PhoneResponse(String number, String citycode, String countrycode) {
         this.number = number; this.citycode = citycode; this.countrycode = countrycode;
     }
-
 
     public String getNumber() { return number; }
     public void setNumber(String number) { this.number = number; }

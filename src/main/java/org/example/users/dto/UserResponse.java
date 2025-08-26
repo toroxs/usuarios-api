@@ -17,9 +17,7 @@ public class UserResponse {
     private String email;
     private List<PhoneResponse> phones;
 
-
     public UserResponse() {}
-
 
     public UserResponse(String id, LocalDateTime created, LocalDateTime modified, LocalDateTime lastLogin,
                         String token, boolean isActive, String name, String email, List<PhoneResponse> phones) {
@@ -27,6 +25,7 @@ public class UserResponse {
         this.token = token; this.isActive = isActive; this.name = name; this.email = email; this.phones = phones;
     }
 
+    //Getters and Setters
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
     public LocalDateTime getCreated() { return created; }

@@ -26,14 +26,13 @@ public class UserControllerTest {
                 "  \"name\": \"Juan Rodriguez\",\n" +
                 "  \"email\": \"juan@rodriguez.org\",\n" +
                 "  \"password\": \"Hunter22\",\n" +
-                "  \"phones\": [{ \"number\": \"1234567\", \"citycode\": \"1\", \"contrycode\": \"57\" }]\n" +
+                "  \"phones\": [{ \"number\": \"1234567\", \"citycode\": \"1\", \"countrycode\": \"57\" }]\n" +
                 "}";
 
         mockMvc.perform(post("/api/usuarios")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                 .andDo(print())
-                // Compatible en lugar de exacto (evita fallo por charset)
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").exists())

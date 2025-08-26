@@ -1,32 +1,5 @@
 package org.example.users.security;
 
-/*import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import java.util.Date;
-
-@Service
-public class JwtService {
-    @Value("${jwt.secret}")
-    private String secret;
-
-    @Value("${jwt.expiration-minutes}")
-    private int expirationMinutes;
-
-    public String generateToken(String userId, String email) {
-        long now = System.currentTimeMillis();
-        long expMillis = now + (long) expirationMinutes * 60 * 1000;
-        return Jwts.builder()
-                .setSubject(userId)
-                .claim("email", email)
-                .setIssuedAt(new Date(now))
-                .setExpiration(new Date(expMillis))
-                .signWith(SignatureAlgorithm.HS256, secret.getBytes())
-                .compact();
-    }
-}*/
-
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -39,12 +12,6 @@ import java.util.Date;
 
 @Service
 public class JwtService {
-
-    //@Value("${jwt.secret}")
-    //private String secret;
-
-    //@Value("${jwt.expiration-minutes}")
-    //private int expirationMinutes;
 
     @Value("${jwt.secret:change_me_change_me_change_me_change_me_32b_min}")
     private String secret;

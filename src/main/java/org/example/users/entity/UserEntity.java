@@ -52,7 +52,7 @@ public class UserEntity {
         this.modified = LocalDateTime.now();
     }
 
-    // Getters y setters
+    // Getters and setters
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
     public String getName() { return name; }

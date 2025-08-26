@@ -23,7 +23,6 @@ jackson:
 serialization:
 write-dates-as-timestamps: false
 
-
 jwt:
 secret: "test_secret_de_32_bytes_min_1234567890abcd"
 expiration-minutes: 120
