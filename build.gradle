@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.18'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'jacoco'
 }
 
 group = 'com.example'
@@ -15,9 +16,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    runtimeOnly 'com.h2database:h2'
 
-    //Compatible con JDK 17
+    runtimeOnly 'com.h2database:h2'
+    testImplementation 'com.h2database:h2'
+
+    //JWT Compatible con JDK 17
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     runtimeOnly   'io.jsonwebtoken:jjwt-impl:0.11.5'
     runtimeOnly   'io.jsonwebtoken:jjwt-jackson:0.11.5'
@@ -31,4 +34,26 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-test { useJUnitPlatform() }
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport, jacocoTestCoverageVerification
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            element = 'CLASS'
+            includes = [
+                    'org.example.users.service.*',
+                    'org.example.users.controller.*',
+                    'org.example.users.security.*',
+                    'org.example.users.exception.*'
+            ]
+            limit {
+                counter = 'INSTRUCTION'
+                value   = 'COVEREDRATIO'
+                minimum = 0.80
+            }
+        }
+    }
+}
