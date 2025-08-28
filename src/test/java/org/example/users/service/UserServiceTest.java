@@ -7,17 +7,18 @@ import org.example.users.entity.UserEntity;
 import org.example.users.exception.DuplicateEmailException;
 import org.example.users.repository.UserRepository;
 import org.example.users.security.JwtService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -26,11 +27,6 @@ class UserServiceTest {
     @Mock private JwtService jwtService;
 
     @InjectMocks private UserService userService;
-
-    @BeforeEach
-    void setUp() {
-        when(jwtService.generateToken(any(), any())).thenReturn("fake.jwt.token");
-    }
 
     @Test
     void register_ok_persiste_token_y_fechas() {
@@ -44,6 +40,9 @@ class UserServiceTest {
             e.setLastLogin(now);
             return e;
         });
+
+        when(jwtService.generateToken(anyString(), eq("juan@rodriguez.org")))
+                .thenReturn("fake.jwt.token");
 
         UserRequest req = new UserRequest();
         req.setName("Juan Rodriguez");
@@ -69,6 +68,7 @@ class UserServiceTest {
         verify(userRepository).existsByEmail("juan@rodriguez.org");
         verify(userRepository).save(any(UserEntity.class));
         verify(jwtService).generateToken(anyString(), eq("juan@rodriguez.org"));
+        verifyNoMoreInteractions(jwtService);
     }
 
     @Test
@@ -85,6 +85,6 @@ class UserServiceTest {
                 .hasMessage("El correo ya registrado");
 
         verify(userRepository, never()).save(any());
-        verify(jwtService, never()).generateToken(any(), any());
+        verify(jwtService, never()).generateToken(anyString(), anyString());
     }
 }
