@@ -1,7 +1,15 @@
 package org.example.users.entity;
 
+import lombok.*;
 import javax.persistence.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString(exclude = "user")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "phones")
 public class PhoneEntity {
@@ -21,16 +29,4 @@ public class PhoneEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
-
-    // Getters and setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getNumber() { return number; }
-    public void setNumber(String number) { this.number = number; }
-    public String getCitycode() { return citycode; }
-    public void setCitycode(String citycode) { this.citycode = citycode; }
-    public String getCountrycode() { return countrycode; }
-    public void setCountrycode(String countrycode) { this.countrycode = countrycode; }
-    public UserEntity getUser() { return user; }
-    public void setUser(UserEntity user) { this.user = user; }
 }
