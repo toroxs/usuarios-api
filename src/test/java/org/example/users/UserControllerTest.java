@@ -21,7 +21,7 @@ public class UserControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void crearUsuario_ok() throws Exception {
+    void crear_usuario() throws Exception {
         String json = "{\n" +
                 "  \"name\": \"Juan Rodriguez\",\n" +
                 "  \"email\": \"juan@rodriguez.org\",\n" +
@@ -42,7 +42,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void crearUsuario_correoDuplicado_conflict() throws Exception {
+    void crear_usuario_correo_duplicado() throws Exception {
         String json = "{\n" +
                 "  \"name\": \"Ana\",\n" +
                 "  \"email\": \"ana@dominio.cl\",\n" +
@@ -65,7 +65,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void crearUsuario_emailInvalido_badRequest() throws Exception {
+    void crear_osuario_email_invalido() throws Exception {
         String json = "{\n" +
                 "  \"name\": \"Juan\",\n" +
                 "  \"email\": \"juan@@dominio\",\n" +
@@ -83,7 +83,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void crearUsuario_passwordInvalida_badRequest() throws Exception {
+    void crear_usuario_password_invalido() throws Exception {
         String json = "{\n" +
                 "  \"name\": \"Juan\",\n" +
                 "  \"email\": \"juan@dominio.cl\",\n" +
